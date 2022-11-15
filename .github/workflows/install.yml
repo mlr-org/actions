@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Query System Dependencies
         id: renv
-        uses: renv-system-dependencies
+        uses: mlr-org/actions/renv-system-dependencies@f178f3b8c81c68d7d0f895aca54e6eb686e0b019
         with:
           path: 'renv.lock'
 
