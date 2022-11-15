@@ -1,0 +1,15 @@
+on: [push]
+
+jobs:
+  renv-system-dependencies-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Query System Dependencies
+        id: renv
+        uses: mlr-org/actions/renv-system-dependencies
+        with:
+          path: 'renv.lock'
+
+      - name: Install System Dependencies
+        run: echo "The command is ${{ steps.renv.outputs.script }}"
