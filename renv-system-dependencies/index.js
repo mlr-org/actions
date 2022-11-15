@@ -3,7 +3,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 const core = require('@actions/core');
 
-let rawdata = fs.readFileSync('/home/marc/repositories/actions/renv-system-dependencies/renv.lock');
+let rawdata = fs.readFileSync(core.getInput('path'));
 let packages = JSON.parse(rawdata).Packages;
 
 
