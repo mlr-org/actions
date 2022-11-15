@@ -1,0 +1,12 @@
+name: 'renv-system-dependencies'
+description: 'Installs system dependencies from renv.lock file'
+inputs:
+  path:
+    description: 'Path to renv.lock file'
+    required: true
+outputs:
+  script:
+    description: 'Install script'
+runs:
+  using: 'node16'
+  main: 'index.js'
