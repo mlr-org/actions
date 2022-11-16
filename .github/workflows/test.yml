@@ -17,6 +17,6 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Install System Dependencies
-        uses: mlr-org/actions/renv-system-dependencies@060e80b9b7335b6e66ec485f629006fb2c421ee7
+        uses: mlr-org/actions/renv-system-dependencies@690c3ddebe418cd36994f39526ad80ce562b38a9
         with:
           path: 'renv.lock'
