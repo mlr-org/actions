@@ -2,6 +2,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 const core = require('@actions/core');
+const exec = require('child_process').exec;
 
 let rawdata = fs.readFileSync(core.getInput('path'));
 let packages = JSON.parse(rawdata).Packages;
@@ -34,6 +35,5 @@ fetchDependencies().then(dependencies => {
     }
     // remove duplicates
     var script = 'sudo apt-get install -y ' + [... new Set(install_script.flat())].join(' ');
-    console.log(script);
-    core.setOutput("script", script);
+    exec(script);
   });
