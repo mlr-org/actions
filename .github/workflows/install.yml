@@ -18,9 +18,6 @@ jobs:
 
       - name: Query System Dependencies
         id: renv
-        uses: mlr-org/actions/renv-system-dependencies@f178f3b8c81c68d7d0f895aca54e6eb686e0b019
+        uses: mlr-org/actions/renv-system-dependencies@24c1e912f4d6896e0772a47ddff5bd1120427419
         with:
           path: 'renv.lock'
-
-      - name: Install System Dependencies
-        run: ${{ steps.renv.outputs.script }}
