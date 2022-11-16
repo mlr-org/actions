@@ -7,7 +7,6 @@ const exec = require('child_process').exec;
 let rawdata = fs.readFileSync(core.getInput('path'));
 let packages = JSON.parse(rawdata).Packages;
 
-
 var cran_packages = [];
 
 for (let key in packages) {
