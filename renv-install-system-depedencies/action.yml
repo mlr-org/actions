@@ -1,0 +1,16 @@
+name: renv-install-system-depedencies
+description: 'Installs system dependencies from renv.lock file'
+inputs:
+  path:
+    description: 'Path to renv.lock file'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - id: query-dependencies
+      uses: mlr-org/actions/renv-query-system-dependencies@8dba6b658abf7d976b643a522a5675afabdee270
+
+    - run: ${{ steps.query-dependencies.outputs.command }}
+      shell: bash
+
