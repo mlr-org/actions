@@ -1,4 +1,4 @@
-name: renv-install-system-depedencies
+name: renv-install-system-dependencies
 description: 'Installs system dependencies from renv.lock file'
 inputs:
   path:
