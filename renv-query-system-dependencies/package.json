@@ -1,0 +1,17 @@
+{
+  "name": "renv-query-system-dependencies",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.0"
+  }
+}
