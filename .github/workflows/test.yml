@@ -1,0 +1,22 @@
+on:
+    workflow_dispatch:
+    push:
+      branches:
+        - main
+    pull_request:
+      branches:
+        - main
+
+name: renv-system-dependencies
+
+jobs:
+  renv-system-dependencies-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install System Dependencies
+        uses: mlr-org/actions/renv-system-dependencies@07c74aeea8a1e46d69cd589d8ef090373fd8e5b2
+        with:
+          path: 'renv.lock'
