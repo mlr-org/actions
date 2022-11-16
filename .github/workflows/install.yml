@@ -7,7 +7,7 @@ on:
     branches:
       - main
 
-name: renv-system-dependencies-test
+name: renv-install-system-depedencies
 
 jobs:
   renv-system-dependencies-test:
@@ -18,6 +18,6 @@ jobs:
 
       - name: Query System Dependencies
         id: renv
-        uses: mlr-org/actions/renv-system-dependencies@8dba6b658abf7d976b643a522a5675afabdee270
+        uses: mlr-org/actions/renv-install-system-depedencies@a86a6156e0b68bc39f1beacacc974b9028884d3d
         with:
           path: 'renv.lock'
