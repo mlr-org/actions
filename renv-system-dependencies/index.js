@@ -16,7 +16,7 @@ for (let key in packages) {
     }
 }
 
-console.log(cran_packages);
+core.info(`Found ${cran_packages.length} CRAN packages in renv.lock: \n ${cran_packages.join('\n')}`)
 
 var req = cran_packages.join('&pkgname=');
 
@@ -27,12 +27,19 @@ async function fetchDependencies() {
 }
 
 fetchDependencies().then(dependencies => {
-    var install_script = [];
+    var dependencies_string = [];
 
     for (let key in dependencies.requirements) {
-        install_script.push(dependencies.requirements[key].requirements.packages)
+        dependencies_string.push(dependencies.requirements[key].requirements.packages)
     }
     // remove duplicates
-    var script = 'sudo apt-get install -y ' + [... new Set(install_script.flat())].join(' ');
-    exec(script);
-  });
+    let unique_dependencies =  [... new Set(dependencies_string.flat())].join(' ');
+    exec('sudo apt-get install -y ' + unique_dependencies, (error, stdout, stderr) => {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return;
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+    });
+});
