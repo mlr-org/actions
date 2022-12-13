@@ -33,3 +33,5 @@ Workflow by [r-lib/actions](https://github.com/r-lib/actions).
 
 When triggering the workflows manually, the "tmate debugging" flag can be checked which will allow you to directly
 interact with the host system on which the actual scripts (actions) will run.
+To continue the action, run `touch continue`.
+A more detailed description of this workflow can be found [here](https://github.com/mxschmitt/action-tmate).
