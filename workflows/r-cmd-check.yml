@@ -1,4 +1,4 @@
-# r cmd check workflow of the mlr3 ecosystem v0.3.0
+# r cmd check workflow of the mlr3 ecosystem v0.3.1
 # https://github.com/mlr-org/actions
 on:
   workflow_dispatch:
@@ -47,9 +47,9 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
 
-      - uses: r-lib/actions/check-r-package@v2
-
       - uses: mxschmitt/action-tmate@v3
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.debug_enabled }}
         with:
           limit-access-to-actor: true
+
+      - uses: r-lib/actions/check-r-package@v2
