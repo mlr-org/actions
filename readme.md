@@ -9,7 +9,7 @@ This javascript action installs system dependencies of packages recorded in a [r
 
 ### quarto-netlify-preview
 
-This composite action deploys previews of rendered quarto sites to [Netlify](https://www.netlify.com/). 
+This composite action deploys previews of rendered quarto sites to [Netlify](https://www.netlify.com/).
 
 ## workflows
 
@@ -29,3 +29,9 @@ This workflow builds a `pkgdown` site and pushes it to gh pages.
 Workflow by [r-lib/actions](https://github.com/r-lib/actions).
 
 
+## Debugging workflows
+
+When triggering the workflows manually, the "tmate debugging" flag can be checked which will allow you to directly
+interact with the host system on which the actual scripts (actions) will run.
+To continue the action, run `touch continue`.
+A more detailed description of this workflow can be found [here](https://github.com/mxschmitt/action-tmate).
