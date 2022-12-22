@@ -35,3 +35,5 @@ When triggering the workflows manually, the "tmate debugging" flag can be checke
 interact with the host system on which the actual scripts (actions) will run.
 To continue the action, run `touch continue`.
 A more detailed description of this workflow can be found [here](https://github.com/mxschmitt/action-tmate).
+
+Tmate can also be used to debug problems on other machines than ones own, for more information see [this article](https://yihui.org/en/2022/12/gha-debug/).
