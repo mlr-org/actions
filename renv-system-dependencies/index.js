@@ -21,6 +21,9 @@ core.info(`Found ${cran_packages.length} CRAN packages in renv.lock: \n${cran_pa
 async function fetchDependencies(packages) {
     const response = await fetch(`https://packagemanager.rstudio.com/__api__/repos/1/sysreqs?all=false&pkgname=${packages.join('&pkgname=')}&distribution=ubuntu&release=20.04`);
     const dependencies = await response.json()
+    if (dependencies.error != null) {
+        throw new Error(dependencies.error)
+    }
     return dependencies
 }
 
@@ -44,4 +47,7 @@ fetchDependencies(cran_packages).then(dependencies => {
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
     });
+}).catch(error => {
+    core.error(error)
+    core.setFailed(error);
 });
