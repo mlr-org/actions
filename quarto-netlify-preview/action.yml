@@ -33,7 +33,7 @@ runs:
       env:
         NETLIFY_AUTH_TOKEN: ${{ inputs.netlify_auth_token }}
         NETLIFY_SITE_ID: ${{ inputs.netlify_site_id }}
-      run: netlify deploy --alias ${{ env.pr_id }} --dir ${{ github.workspace }}/${{ inputs.path }}
+      run: netlify deploy --alias ${{ env.pr_id }} --dir ${{ inputs.path }}
       shell: bash
 
     - name: Add url comment
