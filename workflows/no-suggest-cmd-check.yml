@@ -1,4 +1,4 @@
-# r cmd check workflow without suggests of the mlr3 ecosystem v0.3.1
+# R CMD check workflow without suggested packages v0.4.0
 # https://github.com/mlr-org/actions
 on:
   workflow_dispatch:
@@ -20,6 +20,16 @@ name: no-suggest-cmd-check
 jobs:
   no-suggest-cmd-check:
     runs-on: ${{ matrix.config.os }}
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
 
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
