@@ -1,6 +1,7 @@
-# Reverse dependency check workflow for the mlr3 ecosystem (v0.1.0)
+# Reverse dependency check workflow for the mlr3 ecosystem (v0.2.0)
 # To check a different target package, change `TARGET_PKG_DIR` in `jobs.revdep-check.env`.
 # To check different reverse dependencies (for example, mlr3tuning), update `strategy.matrix.include`.
+# You can remove the `services.redis` section if the package does not require `rush` for the tests
 # Source: https://github.com/mlr-org/actions
 
 on:
@@ -38,7 +39,7 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RUSH_TEST_USE_REDIS: true # tests are allowed to use Redis
+      RUSH_TEST_USE_REDIS: true
       TARGET_PKG_DIR: rush
 
     strategy:
