@@ -4,11 +4,16 @@ GitHub actions, workflows, Claude Code skills, and R package helper files for th
 
 ## Workflows
 
-- **r-cmd-check** – Runs R CMD check via the `rcmdcheck` package on the latest and devel R version. Workflow by [r-lib/actions](https://github.com/r-lib/actions).
-- **dev-cmd-check** – Installs the dev version of an mlr3 package and runs R CMD check. For example, checks `mlr3tuning` with the dev version of `bbotk`.
-- **pkgdown** – Builds a `pkgdown` site and pushes it to gh pages. Workflow by [r-lib/actions](https://github.com/r-lib/actions).
-- **no-suggest-cmd-check** – Runs R CMD check via the `rcmdcheck` package on the latest and devel R version without suggested packages. Workflow by [r-lib/actions](https://github.com/r-lib/actions).
-- **revdep-check** – Checks the reverse dependencies of an mlr3 package. For example, checks `mlr3tuning` with the dev version of `bbotk`.
+- **r-cmd-check** – Runs R CMD check via the `rcmdcheck` package on the latest and devel R version. 
+Workflow by [r-lib/actions](https://github.com/r-lib/actions).
+- **dev-cmd-check** – Checks a package against the dev version of one of its dependencies.
+For example, the `mlr3` repository uses this workflow to check whether `mlr3` works with the dev version of `mlr3misc`.
+- **revdep-check** – Checks the reverse dependencies of a package against its own dev version.
+For example, the `mlr3misc` repository uses this workflow to check whether `mlr3` still works with the dev version of `mlr3misc`.
+- **pkgdown** – Builds a `pkgdown` site and pushes it to gh pages. 
+Workflow by [r-lib/actions](https://github.com/r-lib/actions).
+- **no-suggest-cmd-check** – Runs R CMD check via the `rcmdcheck` package on the latest and devel R version without suggested packages. 
+Workflow by [r-lib/actions](https://github.com/r-lib/actions).
 - **quarto-netlify-preview** – Deploys previews of rendered quarto sites to [Netlify](https://www.netlify.com/).
 
 When triggering the workflows manually, the "tmate debugging" flag can be checked which will allow you to directly interact with the host system on which the actual scripts (actions) will run.
@@ -25,6 +30,9 @@ Claude Code skills for working with mlr3 packages.
 - **critical-code-reviewer** – Provides critical code review.
 - **describe-design** – Describes the design of a package.
 - **pr-create** – Assists with creating pull requests.
+
+Skills from [posit-dev](https://github.com/posit-dev/skills).
+See this [help page](https://support.claude.com/en/articles/12512180-using-skills-in-claude) for more information on how to use skills in Claude.
 
 ## Package
 
