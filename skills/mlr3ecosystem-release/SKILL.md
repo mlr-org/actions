@@ -256,7 +256,9 @@ git pull origin main
 
 ### Step 12: Add a GitHub release
 
-Run the following R command to create a GitHub release from the version tag:
+Use this exact R command — do not substitute `gh release create` or any other
+approach. `usethis::use_github_release()` reads `NEWS.md` to populate the
+release notes and tags the commit correctly, which manual approaches would miss.
 
 ```bash
 Rscript -e 'usethis::use_github_release()'
@@ -264,7 +266,9 @@ Rscript -e 'usethis::use_github_release()'
 
 ### Step 13: Push dev version to GitHub
 
-Run the following R command to bump the version to a development version:
+Use this exact R command — do not edit `DESCRIPTION` by hand or use a different
+version string. `usethis::use_dev_version()` appends `.9000` in the correct
+R-package convention and adds the development section header to `NEWS.md`.
 
 ```bash
 Rscript -e 'usethis::use_dev_version(push = FALSE)'
