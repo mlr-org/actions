@@ -112,7 +112,7 @@ After the command succeeds, retrieve the issue number that was just created:
 gh issue list --limit 1 --json number --jq '.[0].number'
 ```
 
-Store this as `${ISSUE_ID}` for use in Step 6.
+Store this as `${ISSUE_ID}` for use in Step 9.
 
 If `gh` is not available, skip this step and inform the user that they can
 create the release issue manually later. In that case, `${ISSUE_ID}` will be
@@ -129,7 +129,90 @@ Rscript -e 'usethis::use_version(which = "major")'
 Replace `"major"` with `"minor"` or `"patch"` depending on the release type
 chosen in Step 2.
 
-### Step 6: Push to GitHub and open a pull request
+### Step 6: Check git history for missing NEWS.md entries
+
+The goal here is to catch anything that landed in the repo since the last
+release but wasn't documented in `NEWS.md`. Omissions are easy to miss during
+development and this is the last chance to add them before CRAN submission.
+
+First, find the last release tag and list commits since then:
+
+```bash
+LAST_TAG=$(git tag --sort=-version:refname | head -1)
+git log "${LAST_TAG}..HEAD" --oneline --no-merges
+```
+
+If there are no tags yet (first release), use the initial commit:
+
+```bash
+git log --oneline --no-merges
+```
+
+Then read the first section of `NEWS.md` (the release notes for the version
+being prepared). Compare the commit list against the NEWS entries: look for
+commits that describe user-facing changes (new features, bug fixes, behaviour
+changes, deprecations) that do not appear to have a corresponding entry.
+
+Ignore commits that are purely internal and don't affect users, such as:
+- CI / GitHub Actions changes
+- Code style / linting fixes
+- Dependency bumps that have no user-visible effect
+- Merge commits
+
+If you find likely missing entries, summarise them clearly for the user and
+ask whether they want to add them to `NEWS.md` before proceeding. If the user
+says yes, open `NEWS.md` and add the missing entries under the current release
+section, then confirm with the user before moving on.
+
+### Step 7: Check for invalid URLs
+
+Run the following R command to check for invalid URLs:
+
+```bash
+Rscript -e 'urlchecker::url_check()'
+```
+
+If there are any invalid URLs, ask the user if they should be fixed.
+
+### Step 8: Check for Remotes field
+
+Check for the presence of the `Remotes` field in the `DESCRIPTION` file.
+If it is present, ask the user if it should be removed (CRAN does not allow
+packages with a `Remotes` field).
+
+### Step 9: Update cran-comments.md
+
+The `cran-comments.md` file documents the test environments and any notes for
+the CRAN team. CRAN reviewers read this file, so it's important to keep it
+current for every submission.
+
+Check whether `cran-comments.md` exists:
+
+- **If it does not exist**, create it with this template:
+
+  ```markdown
+  ## Test environments
+
+  - local: R version x.y.z, Platform
+
+  ## R CMD check results
+
+  0 errors | 0 warnings | 0 notes
+
+  ## Reverse dependencies
+
+  Checked with revdepcheck::revdep_check(). No new problems.
+  ```
+
+  Inform the user that `cran-comments.md` has been created and they should fill
+  in the actual test environments and R CMD check results before submitting to
+  CRAN.
+
+- **If it does exist**, read it and inform the user that they should update it
+  for the new release (e.g., updated R version, new check results, response to
+  any previous CRAN reviewer comments).
+
+### Step 10: Push to GitHub and open a pull request
 
 Commit the changes with the message `release: ${NEW_VERSION}`:
 
@@ -159,9 +242,9 @@ open a pull request manually on GitHub.
 
 Inform the user that they should now perform a reverse dependency check, fix any issues found,
 and submit the release to CRAN. Wait until the user confirms that the release has
-been accepted by CRAN before proceeding to Step 7.
+been accepted by CRAN before proceeding to the next step.
 
-### Step 7: Merge the pull request
+### Step 11: Merge the pull request
 
 Merge the pull request and checkout the main branch:
 
@@ -171,7 +254,7 @@ git checkout main
 git pull origin main
 ```
 
-### Step 8: Add a GitHub release
+### Step 12: Add a GitHub release
 
 Run the following R command to create a GitHub release from the version tag:
 
@@ -179,7 +262,7 @@ Run the following R command to create a GitHub release from the version tag:
 Rscript -e 'usethis::use_github_release()'
 ```
 
-### Step 9: Push dev version to GitHub
+### Step 13: Push dev version to GitHub
 
 Run the following R command to bump the version to a development version:
 
@@ -196,4 +279,3 @@ git push origin main
 ```
 
 The workflow is now complete. Inform the user that the release of `${PACKAGE_NAME} ${NEW_VERSION}` is done.
-
