@@ -63,6 +63,18 @@ New chapters and sections which were not part of the original print version of t
 - Wrong `# Predict Sets, Validation and Internal Tuning`
 - Right `# Predict Sets, Validation and Internal Tuning (+)`
 
+Early-stage chapters that have not yet been rigorously edited and reviewed must additionally be marked as *Draft* in the title.
+
+Online-only chapters must wrap their entire content in:
+
+```qmd
+::: {.content-visible when-format="html"}
+...
+:::
+```
+
+Flag any online-only chapter that is missing this block.
+
 ## Errata
 
 Changes to the book should be listed in `book/chapters/appendices/errata.qmd`.
@@ -205,6 +217,9 @@ Work through the file systematically:
 - [ ] `_setup.qmd` included at top; no top-level `set.seed()`
 - [ ] `authors(chapter)` call present
 - [ ] Abstract present and 150–200 words
+- [ ] New chapter marked with `+` in title (if not in print edition)
+- [ ] Early-stage chapter marked as *Draft* in title (if applicable)
+- [ ] Online-only chapter content wrapped in `::: {.content-visible when-format="html"}`
 - [ ] Introduction covers: what, why, theory, conservative formulae
 - [ ] Scoped introductions for chapters with distinct subsections
 - [ ] Conclusion: key takeaways present
