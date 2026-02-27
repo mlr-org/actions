@@ -156,3 +156,44 @@ Show the user the pull request URL on success.
 
 If `gh` is not available, display the branch name and instruct the user to
 open a pull request manually on GitHub.
+
+Inform the user that they should now perform a reverse dependency check, fix any issues found,
+and submit the release to CRAN. Wait until the user confirms that the release has
+been accepted by CRAN before proceeding to Step 7.
+
+### Step 7: Merge the pull request
+
+Merge the pull request and checkout the main branch:
+
+```bash
+gh pr merge --squash --delete-branch release
+git checkout main
+git pull origin main
+```
+
+### Step 8: Add a GitHub release
+
+Run the following R command to create a GitHub release from the version tag:
+
+```bash
+Rscript -e 'usethis::use_github_release()'
+```
+
+### Step 9: Push dev version to GitHub
+
+Run the following R command to bump the version to a development version:
+
+```bash
+Rscript -e 'usethis::use_dev_version(push = FALSE)'
+```
+
+Commit and push the changes:
+
+```bash
+git add DESCRIPTION NEWS.md
+git commit -m "release: ${NEW_VERSION}.9000"
+git push origin main
+```
+
+The workflow is now complete. Inform the user that the release of `${PACKAGE_NAME} ${NEW_VERSION}` is done.
+
