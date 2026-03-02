@@ -2,6 +2,16 @@
 
 GitHub actions, workflows, Claude Code skills, and R package helper files for the mlr3 ecosystem.
 
+## Package
+
+Helper files for R package development in the mlr3 ecosystem.
+
+- **AGENTS.md** – Development guidelines for AI coding agents (key commands, coding standards, testing, documentation, NEWS.md, writing).
+- **.editorconfig** – Editor configuration for consistent coding styles.
+- **.clangd** – Clangd configuration.
+- **.gitignore** – Gitignore rules for R packages.
+- **.lintr** – Linting configuration for R code.
+
 ## Workflows
 
 - **r-cmd-check** – Runs R CMD check via the `rcmdcheck` package on the latest and devel R version. 
@@ -37,12 +47,3 @@ Claude Code skills for working with mlr3 packages.
 
 Skills from [posit-dev](https://github.com/posit-dev/skills).
 See this [help page](https://support.claude.com/en/articles/12512180-using-skills-in-claude) for more information on how to use skills in Claude.
-
-## Package
-
-Helper files for R package development in the mlr3 ecosystem.
-
-- **.editorconfig** – Editor configuration for consistent coding styles.
-- **.clangd** – Clangd configuration.
-- **.lintr** – Linting configuration for R code.
-
