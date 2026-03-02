@@ -31,6 +31,77 @@ Rscript -e "devtools::check()"
 ### Coding
 
 * Always use `=` for assignment, never `<-`.
+* 2-space indentation, 180-character line limit.
+* `snake_case` for functions and variables, `CamelCase` for R6 classes.
+* Double quotes for strings, explicit `TRUE`/`FALSE` (never `T`/`F`), explicit `1L` for integers.
+* Use `invoke()` from mlr3misc instead of `do.call()`.
+
+### Architecture
+
+This package uses R6 classes organized around a dictionary registry pattern.
+
+#### Class hierarchy
+
+- `Learner` > `LearnerClassif` / `LearnerRegr` > concrete (e.g., `LearnerClassifRpart`)
+- `Task` > `TaskSupervised` > `TaskClassif` / `TaskRegr`
+- `Measure` > `MeasureClassif` / `MeasureRegr` / `MeasureSimilarity`
+- `Resampling` > `ResamplingCV`, `ResamplingHoldout`, etc.
+- `DataBackend` > `DataBackendDataTable`, `DataBackendCbind`, etc.
+- `Prediction` > `PredictionClassif` / `PredictionRegr`
+
+#### File naming
+
+- One R6 class per file, named exactly as the class: `LearnerClassifRpart.R` contains `LearnerClassifRpart`.
+- Named dataset tasks use an underscore: `TaskClassif_iris.R`.
+- Dictionary files: `mlr_learners.R`, `mlr_tasks.R`, etc.
+
+#### Dictionary system
+
+Objects are registered in dictionaries and accessed via sugar functions:
+
+| Dictionary            | Sugar                | Example                          |
+|-----------------------|----------------------|----------------------------------|
+| `mlr_learners`        | `lrn()` / `lrns()`   | `lrn("classif.rpart", cp = 0.1)` |
+| `mlr_tasks`           | `tsk()` / `tsks()`   | `tsk("iris")`                    |
+| `mlr_measures`        | `msr()` / `msrs()`   | `msr("classif.ce")`              |
+| `mlr_resamplings`     | `rsmp()` / `rsmps()` | `rsmp("cv", folds = 5)`          |
+| `mlr_task_generators` | `tgen()` / `tgens()` | `tgen("friedman1")`              |
+
+Every new object **must** be registered at the bottom of its file:
+
+```r
+#' @include mlr_learners.R
+mlr_learners$add("classif.rpart", function() LearnerClassifRpart$new())
+```
+
+#### Collation order
+
+Derived classes must declare `#' @include ParentClass.R` in their roxygen header. This controls the `Collate:` field in DESCRIPTION so base classes load before derived classes.
+
+#### Hyperparameters (paradox)
+
+Parameters are defined with `paradox::ps()` and must be tagged `"train"` or `"predict"`:
+
+```r
+ps = ps(
+  cp = p_dbl(0, 1, default = 0.01, tags = "train"),
+  keep_model = p_lgl(default = FALSE, tags = "train")
+)
+```
+
+In `.train()` / `.predict()`, retrieve values with `self$param_set$get_values(tags = "train")`.
+
+#### Core dependencies
+
+`data.table`, `checkmate`, `mlr3misc`, `paradox`, `R6`, and `cli` are imported wholesale. Use their functions directly without `::`. Key mlr3misc utilities: `map()`, `map_chr()`, `invoke()`, `calculate_hash()`, `str_collapse()`, `%nin%`, `%??%`.
+
+#### Error handling
+
+Use structured error/warning functions from mlr3misc: `error_config()`, `error_input()`, `error_learner_train()`, `error_learner_predict()`, `warning_config()`, `warning_input()`. These support `sprintf`-style formatting.
+
+#### Reflections
+
+`mlr_reflections` is an environment that stores allowed types, properties, and roles. Extension packages modify it to register new task types. Check it when adding new properties or feature types.
 
 ### Testing
 
@@ -38,6 +109,9 @@ Rscript -e "devtools::check()"
 - All new code should have an accompanying test.
 - If there are existing tests, place new tests next to similar existing tests.
 - Strive to keep your tests minimal with few comments.
+- New learners must pass `run_autotest()` and `run_paramtest()`.
+- Use shared assertion helpers: `expect_learner()`, `expect_task()`, `expect_resampling()`, `expect_measure()`, `expect_prediction()`.
+- Shared test infrastructure lives in `inst/testthat/` and is sourced by extension packages too.
 
 ### Documentation
 
@@ -48,6 +122,9 @@ Rscript -e "devtools::check()"
 - Always re-document the package after changing a roxygen2 comment.
 - Use `pkgdown::check_pkgdown()` to check that all topics are included in the reference index.
 - Don’t hand-edit generated artifacts: `man/`, or `NAMESPACE`.
+- Roxygen templates live in `man-roxygen/` (e.g., `@template learner`, `@template param_id`). Use `@templateVar` to pass values.
+- Bibliographic references go in `R/bibentries.R` and are cited with `` `r format_bib("key")` ``.
+- Man page names for dictionary objects follow `mlr_learners_classif.rpart`, `mlr_tasks_iris`, etc.
 
 ### `NEWS.md`
 
