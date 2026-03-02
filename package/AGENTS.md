@@ -35,6 +35,9 @@ Rscript -e "devtools::check()"
 * `snake_case` for functions and variables, `CamelCase` for R6 classes.
 * Double quotes for strings, explicit `TRUE`/`FALSE` (never `T`/`F`), explicit `1L` for integers.
 * Use `invoke()` from mlr3misc instead of `do.call()`.
+* Use implicit return values for functions.
+* User-facing API (exported functions, public R6 methods) must have `checkmate` `assert_*()` argument checks. For internal code, match the existing level of defensiveness.
+* Before implementing something, read similar existing files first to match the established patterns.
 
 ### Architecture
 
@@ -59,13 +62,13 @@ This package uses R6 classes organized around a dictionary registry pattern.
 
 Objects are registered in dictionaries and accessed via sugar functions:
 
-| Dictionary            | Sugar                | Example                          |
-|-----------------------|----------------------|----------------------------------|
-| `mlr_learners`        | `lrn()` / `lrns()`   | `lrn("classif.rpart", cp = 0.1)` |
-| `mlr_tasks`           | `tsk()` / `tsks()`   | `tsk("iris")`                    |
-| `mlr_measures`        | `msr()` / `msrs()`   | `msr("classif.ce")`              |
-| `mlr_resamplings`     | `rsmp()` / `rsmps()` | `rsmp("cv", folds = 5)`          |
-| `mlr_task_generators` | `tgen()` / `tgens()` | `tgen("friedman1")`              |
+| Dictionary | Sugar | Example |
+|---|---|---|
+| `mlr_learners` | `lrn()` / `lrns()` | `lrn("classif.rpart", cp = 0.1)` |
+| `mlr_tasks` | `tsk()` / `tsks()` | `tsk("iris")` |
+| `mlr_measures` | `msr()` / `msrs()` | `msr("classif.ce")` |
+| `mlr_resamplings` | `rsmp()` / `rsmps()` | `rsmp("cv", folds = 5)` |
+| `mlr_task_generators` | `tgen()` / `tgens()` | `tgen("friedman1")` |
 
 Every new object **must** be registered at the bottom of its file:
 
@@ -91,6 +94,12 @@ ps = ps(
 
 In `.train()` / `.predict()`, retrieve values with `self$param_set$get_values(tags = "train")`.
 
+There is a distinction between `default` and `init` values:
+- `default` describes the behavior when a parameter is not set at all (i.e., the upstream function's default). It is informational only.
+- `init` (via `p_xxx(init = ...)`) sets the parameter to a value upon construction. Use this when the mlr3 default should differ from the upstream default.
+- A parameter tagged `"required"` causes an error if not set. A required parameter cannot have a `default` (that would be contradictory).
+- paradox does type-checking and range-checking automatically; `get_values()` checks that required params are present. Additional feasibility checks are rarely needed.
+
 #### Core dependencies
 
 `data.table`, `checkmate`, `mlr3misc`, `paradox`, `R6`, and `cli` are imported wholesale. Use their functions directly without `::`. Key mlr3misc utilities: `map()`, `map_chr()`, `invoke()`, `calculate_hash()`, `str_collapse()`, `%nin%`, `%??%`.
@@ -109,6 +118,7 @@ Use structured error/warning functions from mlr3misc: `error_config()`, `error_i
 - All new code should have an accompanying test.
 - If there are existing tests, place new tests next to similar existing tests.
 - Strive to keep your tests minimal with few comments.
+- The full test suite takes a long time. Only run tests relevant to your changes with `devtools::test(filter = '^{name}')`.
 - New learners must pass `run_autotest()` and `run_paramtest()`.
 - Use shared assertion helpers: `expect_learner()`, `expect_task()`, `expect_resampling()`, `expect_measure()`, `expect_prediction()`.
 - Shared test infrastructure lives in `inst/testthat/` and is sourced by extension packages too.
@@ -125,6 +135,7 @@ Use structured error/warning functions from mlr3misc: `error_config()`, `error_i
 - Roxygen templates live in `man-roxygen/` (e.g., `@template learner`, `@template param_id`). Use `@templateVar` to pass values.
 - Bibliographic references go in `R/bibentries.R` and are cited with `` `r format_bib("key")` ``.
 - Man page names for dictionary objects follow `mlr_learners_classif.rpart`, `mlr_tasks_iris`, etc.
+- When you write examples, make sure they work.
 
 ### `NEWS.md`
 
@@ -152,3 +163,9 @@ Work paragraph by paragraph, always starting by making a TODO list that includes
 Fix spelling, grammar, and other minor problems without asking the user. Label any unclear, confusing, or ambiguous sentences with a FIXME comment.
 
 Only report what you have changed.
+
+### References
+
+- [mlr3book](https://mlr3book.mlr-org.com/) — comprehensive guide to the mlr3 ecosystem.
+- [mlr3misc](https://github.com/mlr-org/mlr3misc) — helper functions used throughout the codebase.
+- [paradox](https://github.com/mlr-org/paradox) — hyperparameter/configuration space definitions.
