@@ -1,0 +1,6 @@
+do use use radian or arf to have a better R console? then we can maybe clean up .Rprofile
+
+we need a place for cspell words / or define which spellchecker to use
+
+
+
