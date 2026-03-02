@@ -25,11 +25,15 @@ Tmate can also be used to debug problems on other machines than ones own, for mo
 
 Claude Code skills for working with mlr3 packages.
 
-- **authoring** – Assists with package authoring tasks.
-- **cran-extrachecks** – Helps with CRAN extra checks.
-- **critical-code-reviewer** – Provides critical code review.
-- **describe-design** – Describes the design of a package.
-- **pr-create** – Assists with creating pull requests.
+- **authoring** – Guides Quarto document authoring and R Markdown migration to Quarto.
+- **cran-extrachecks** – Checks for common CRAN requirements not caught by `devtools::check()`.
+- **critical-code-reviewer** – Conducts rigorous code reviews identifying security holes, lazy patterns, and bad practices.
+- **describe-design** – Researches a codebase and creates architectural documentation with Mermaid diagrams.
+- **mlr3book-reviewer** – Reviews mlr3book chapters for compliance with the style guide and chapter structure.
+- **mlr3ecosystem-release** – Prepares CRAN releases of packages in the mlr3 ecosystem.
+- **mlr3gallery-reviewer** – Reviews gallery posts on mlr-org.com for compliance with the style guide.
+- **name-chunk** – Names unnamed R code chunks in `.qmd` files using the `[file-name]-[number]` pattern.
+- **pr-create** – Creates a pull request, monitors GitHub CI, and debugs failures until CI passes.
 
 Skills from [posit-dev](https://github.com/posit-dev/skills).
 See this [help page](https://support.claude.com/en/articles/12512180-using-skills-in-claude) for more information on how to use skills in Claude.

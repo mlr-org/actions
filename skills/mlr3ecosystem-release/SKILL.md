@@ -2,7 +2,7 @@
 name: mlr3ecosystem-release
 description: >
   Prepare a CRAN release of packages in the mlr3 ecosystem.
-tools: Read, Edit, Glob, Grep, Bash, Write, AskUserQuestion
+tools: Read, Edit, Glob, Grep, Bash, Write, AskUserQuestion, WebFetch
 ---
 
 # mlr3ecosystem-release
@@ -71,7 +71,32 @@ strip that suffix before calculating the new version.
 
 Display: "Preparing release checklist for ${PACKAGE_NAME} ${CURRENT_VERSION} → ${NEW_VERSION}".
 
-### Step 3: Create a new release branch
+### Step 3: Check current CRAN check results
+
+Before making any changes, check whether the package currently has any issues on
+CRAN. Fetch the CRAN checks page for the package:
+
+```
+https://cloud.r-project.org/web/checks/check_results_${PACKAGE_NAME}.html
+```
+
+Use the WebFetch tool with the prompt "Extract ALL check results from the table.
+For each row list the flavour and the status (OK, NOTE, WARNING, or ERROR).
+Also list any additional issues noted below the table." to retrieve and parse
+the page.
+
+**If the page is not found (404):** The package is not yet on CRAN (first
+release). Skip this step silently and continue.
+
+**If any check flavour shows ERROR, WARNING, or NOTE:** Display the issues
+clearly to the user, including the affected flavour(s) and their status, and
+inform them that existing CRAN check issues should be resolved before submitting
+a new release. Stop the workflow.
+
+**If all check flavours show OK:** Inform the user that all CRAN checks are
+passing and continue with the release workflow.
+
+### Step 4: Create a new release branch
 
 Check whether a branch named `release` already exists (locally or on the
 remote). If it does, ask the user using AskUserQuestion:
@@ -97,7 +122,7 @@ git pull origin main
 git checkout -b release
 ```
 
-### Step 4: Create a GitHub release issue
+### Step 5: Create a GitHub release issue
 
 If `gh` is available and authenticated, run the following R command to create a
 GitHub release issue:
@@ -112,13 +137,13 @@ After the command succeeds, retrieve the issue number that was just created:
 gh issue list --limit 1 --json number --jq '.[0].number'
 ```
 
-Store this as `${ISSUE_ID}` for use in Step 9.
+Store this as `${ISSUE_ID}` for use in Step 10.
 
 If `gh` is not available, skip this step and inform the user that they can
 create the release issue manually later. In that case, `${ISSUE_ID}` will be
 unknown.
 
-### Step 5: Increase the version number
+### Step 6: Increase the version number
 
 Run the following R command to update the version in `DESCRIPTION` and `NEWS.md`:
 
@@ -129,7 +154,7 @@ Rscript -e 'usethis::use_version(which = "major")'
 Replace `"major"` with `"minor"` or `"patch"` depending on the release type
 chosen in Step 2.
 
-### Step 6: Check git history for missing NEWS.md entries
+### Step 7: Check git history for missing NEWS.md entries
 
 The goal here is to catch anything that landed in the repo since the last
 release but wasn't documented in `NEWS.md`. Omissions are easy to miss during
@@ -164,7 +189,7 @@ ask whether they want to add them to `NEWS.md` before proceeding. If the user
 says yes, open `NEWS.md` and add the missing entries under the current release
 section, then confirm with the user before moving on.
 
-### Step 7: Check for invalid URLs
+### Step 8: Check for invalid URLs
 
 Run the following R command to check for invalid URLs:
 
@@ -174,13 +199,13 @@ Rscript -e 'urlchecker::url_check()'
 
 If there are any invalid URLs, ask the user if they should be fixed.
 
-### Step 8: Check for Remotes field
+### Step 9: Check for Remotes field
 
 Check for the presence of the `Remotes` field in the `DESCRIPTION` file.
 If it is present, ask the user if it should be removed (CRAN does not allow
 packages with a `Remotes` field).
 
-### Step 9: Update cran-comments.md
+### Step 10: Update cran-comments.md
 
 The `cran-comments.md` file documents the test environments and any notes for
 the CRAN team. CRAN reviewers read this file, so it's important to keep it
@@ -212,7 +237,7 @@ Check whether `cran-comments.md` exists:
   for the new release (e.g., updated R version, new check results, response to
   any previous CRAN reviewer comments).
 
-### Step 10: Push to GitHub and open a pull request
+### Step 11: Push to GitHub and open a pull request
 
 Commit the changes with the message `release: ${NEW_VERSION}`:
 
@@ -232,7 +257,7 @@ gh pr create \
   --head release
 ```
 
-If `${ISSUE_ID}` is unknown (because Step 4 was skipped), omit the `--body`
+If `${ISSUE_ID}` is unknown (because Step 5 was skipped), omit the `--body`
 flag and add it manually after the PR is created.
 
 Show the user the pull request URL on success.
@@ -244,7 +269,9 @@ Inform the user that they should now perform a reverse dependency check, fix any
 and submit the release to CRAN. Wait until the user confirms that the release has
 been accepted by CRAN before proceeding to the next step.
 
-### Step 11: Merge the pull request
+### Step 12: Merge the pull request
+
+IMPORTANT: Always use `--squash` when merging. A squash merge is mandatory — never use a regular merge or rebase merge.
 
 Merge the pull request and checkout the main branch:
 
@@ -254,7 +281,7 @@ git checkout main
 git pull origin main
 ```
 
-### Step 12: Add a GitHub release
+### Step 13: Add a GitHub release
 
 Use this exact R command — do not substitute `gh release create` or any other
 approach. `usethis::use_github_release()` reads `NEWS.md` to populate the
@@ -264,7 +291,7 @@ release notes and tags the commit correctly, which manual approaches would miss.
 Rscript -e 'usethis::use_github_release()'
 ```
 
-### Step 13: Push dev version to GitHub
+### Step 14: Push dev version to GitHub
 
 Use this exact R command — do not edit `DESCRIPTION` by hand or use a different
 version string. `usethis::use_dev_version()` appends `.9000` in the correct
