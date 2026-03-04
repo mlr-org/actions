@@ -12,6 +12,8 @@
 ^.*\.Rproj$
 ^AGENTS.md$
 ^air.toml$
+^attic$
+^attic_local$
 ^CITATION.cff$
 ^CLAUDE.md$
 ^CONTRIBUTING.md$
