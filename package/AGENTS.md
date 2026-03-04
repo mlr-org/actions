@@ -36,6 +36,7 @@ Rscript -e "devtools::check()"
 * Double quotes for strings, explicit `TRUE`/`FALSE` (never `T`/`F`), explicit `1L` for integers.
 * Use `invoke()` from mlr3misc instead of `do.call()`.
 * Use implicit return values for functions.
+* Prefer `result = if (...) ... else ...` over `if (...) { result = ... } else { result = ... }` when the only difference between branches is the assigned value.
 * User-facing API (exported functions, public R6 methods) must have `checkmate` `assert_*()` argument checks. For internal code, match the existing level of defensiveness.
 * Before implementing something, read similar existing files first to match the established patterns.
 
