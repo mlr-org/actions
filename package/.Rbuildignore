@@ -22,3 +22,5 @@
 ^README\.Rmd$
 ^README.html$
 ^tests/testthat/_object_snapshots$
+^CLAUDE.md$
+^AGENTS.md$
