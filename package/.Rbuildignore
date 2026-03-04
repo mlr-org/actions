@@ -20,7 +20,9 @@
 ^docs$
 ^inst/extdata/.+\.R$
 ^LICENSE$
+^local_attic$
 ^man-roxygen$
+^paper$
 ^pkgdown$
 ^README\.Rmd$
 ^README.html$
