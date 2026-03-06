@@ -100,6 +100,7 @@ Rscript -e "devtools::check()"
 - Use American english
 - Use the Oxford comma
 - Do not capitalize normal nouns or method names. "Bayesian" is capitalized, "random forest" is not.
+- Use cspell to check against typos, and add needed words to .cspell/project-words.txt if reasonable
 
 
 

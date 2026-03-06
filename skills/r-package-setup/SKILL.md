@@ -41,7 +41,7 @@ If either is missing, ask first.
    - `.Rbuildignore`
    - `.vscode/settings.json`
    - `.vscode/tasks.json`
-   - `.cspell`
+   - `.cspell/package-words.txt`
 6. If any destination file already exists, only replace it when the user explicitly approved overwriting. Otherwise skip it and report the skip.
 7. Read the target package's `AGENTS.md` and follow it for all further work in that package.
 8. Report which files were symlinked, copied, overwritten, or skipped.
