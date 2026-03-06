@@ -1,16 +1,21 @@
-# mlr3 ecosystem
-
-GitHub actions, workflows, Claude Code skills, and R package helper files for the mlr3 ecosystem.
+# R Package development -- In general and for mlr3 ecosystem
 
 ## Package
 
-Helper files for R package development in the mlr3 ecosystem.
+Config and agent / rules files for package devlopment
 
-- **AGENTS.md** – Development guidelines for AI coding agents (key commands, coding standards, testing, documentation, NEWS.md, writing).
-- **.editorconfig** – Editor configuration for consistent coding styles.
-- **.clangd** – Clangd configuration.
+- **.editorconfig** – Basic config for nearly all editors, not much needed anymore, but will also not hurt.
+ NB: We have autoformatters and also other config files for specific IDEs, and made the settings match.  
 - **.gitignore** – Gitignore rules for R packages.
+- **AGENTS.md** – Development guidelines for AI coding agents (key commands, coding standards, testing, documentation, NEWS.md, writing).
+- **.clangd** – Clangd configuration.
 - **.lintr** – Linting configuration for R code.
+- **.Profile** – Setup for standard R console. Not shipped in project dir, als people have different preferences and some of us
+use "radian" as an R console. Likely best use: Copy this to your HOME dir or symlink it there.
+- **Package installations and updates** – Use pak. The .Rprofile above also has a small helper to install binaries from posit.
+
+
+
 
 ## Workflows
 

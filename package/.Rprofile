@@ -1,10 +1,30 @@
 # Install packages without sources; prevents memory issues in renv projects
 options("install.opts" = "--without-keep.source")
 
+pkg_install_binary <- function(pkg, ...) {
+  repo = Sys.getenv("R_BINARY_REPO")
+  if (is.null(repo) || trimws(repo) == "") {
+    stop("R_BINARY_REPO is not set! Put something like 'export R_BINARY_REPO=\"https://packagemanager.posit.co/cran/__linux__/jammy/latest\"' in your .bashrc")
+  } else {
+    message(sprintf("Using Package Manager binary repository: %s", toString(repo)))
+  }
+  old = options(repos = c(CRAN = toString(repo)))
+  on.exit(options(old), add = TRUE)
+  pak::pkg_install(pkg, ...)
+}
+
 if (interactive()) {
-  # Disable colored output for this project, because otherwise
-  # in error outputs paths with line-nrs are colored and we cannot ctrl-click on them in vscode
-  options(crayon.enabled = FALSE)
+  options(
+    menu.graphics=FALSE, #no popups, use text prompts
+    useFancyQuotes = FALSE, # Uses straight ASCII quotes (" and ') instead of typographic “curly” quotes in
+    digits = 4, # don't print a million digits
+    scipen = 2, # use scientific notation for values >10^7
+    help_type = "html", #html help is nicer than the terminal one
+    deparse.max.lines = 3L, # reduce output of traceback
+    # Disable colored output for this project, because otherwise
+    # in error outputs paths with line-nrs are colored and we cannot ctrl-click on them in vscode
+    crayon.enabled = FALSE
+  )
 
   # enable persistent history
   histfile = file.path(getwd(), ".Rhistory") # project-local history
@@ -21,7 +41,7 @@ if (interactive()) {
   }
 
   # autoload devel packages
-  devel_packages = c("devtools", "testthat", "roxygen2")
+  devel_packages = c("devtools", "testthat", "roxygen2", "pak")
   message(sprintf(
     "Loading devel packages: %s",
     paste(devel_packages, collapse = ", ")
