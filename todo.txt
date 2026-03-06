@@ -2,25 +2,13 @@ clang-tidy for C linting machen
 
 compile commands testen
 
-so ein skeletion setup skill ding, damit ich ein R paket erstellen kann aber alle config files gleich da sind und meiner rules beachett werden
-
-spellchecker / cpsell setup
-
 gucken dass die skillz auch mit cursor usw gehen
 
-agents.md für r packages fertig stellen
-
-spellcheck für AE konfigirieren und in der Agent auch sagen dass wir das wollen, bzw gleiche eine language.md haben
-
 marc erklärt mir sandbox setup
-
-testen wie diffs bei claude aussehen
 
 generisches setup für multiple agents.md files
 
 MD file auch für C code schreiben
-
-do we need pkgdown in general setup?
 
 {
   "sandbox": {
@@ -35,10 +23,7 @@ claude asks WAY too often for permissions? how to config this
 
 
 generalize setup to multiple llm tools
-
-
-
-openAI Codex, Claude	AGENTS.md
-Claude Code	CLAUDE.md
-Gemini CLI	GEMINI.md
-GitHub Copilot	.github/copilot-instructions.md
+ openAI Codex, Claude	AGENTS.md
+ Claude Code	CLAUDE.md
+ Gemini CLI	GEMINI.md
+ GitHub Copilot	.github/copilot-instructions.md
