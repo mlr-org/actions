@@ -7,7 +7,7 @@ IndentWidth: 2              # 2-space indentation
 ContinuationIndentWidth: 2  # wrapped lines indent by 2 spaces
 
 # Line length
-ColumnLimit: 180            # max line length
+ColumnLimit: 120            # max line length
 
 # Brace placement
 BreakBeforeBraces: Attach   # opening brace stays on same line
