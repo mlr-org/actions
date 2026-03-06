@@ -2,5 +2,13 @@ clang-tidy for C linting machen
 
 compile commands testen
 
+so ein skeletion setup skill ding, damit ich ein R paket erstellen kann aber alle config files gleich da sind und meiner rules beachett werden
+
+spellchecker / cpsell setup
+
+LL = 120
+
+gucken dass die skillz auch mit cursor usw gehen
+
 
 
