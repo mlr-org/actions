@@ -1,6 +1,7 @@
 ^\.ccache$
 ^\.clangd$
 ^\.claude$
+^\.cspell$
 ^\.cursor$
 ^\.editorconfig$
 ^\.git$
@@ -17,6 +18,7 @@
 ^attic_local$
 ^CITATION.cff$
 ^CLAUDE.md$
+^cspell.json$
 ^CONTRIBUTING.md$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
