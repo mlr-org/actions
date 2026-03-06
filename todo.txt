@@ -32,6 +32,11 @@ do we need pkgdown in general setup?
 }
 
 
+generalize setup to multiple llm tools
 
 
 
+openAI Codex, Claude	AGENTS.md
+Claude Code	CLAUDE.md
+Gemini CLI	GEMINI.md
+GitHub Copilot	.github/copilot-instructions.md
