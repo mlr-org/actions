@@ -10,5 +10,18 @@ LL = 120
 
 gucken dass die skillz auch mit cursor usw gehen
 
+agents.md für r packages fertig stellen
+
+spellcheck für AE konfigirieren und in der Agent auch sagen dass wir das wollen, bzw gleiche eine language.md haben
+
+marc erklärt mir sandbox setup
+
+testen wie diffs bei claude aussehen
+
+
+
+
+
+
 
 

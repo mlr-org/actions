@@ -26,7 +26,7 @@ If either is missing, ask first.
 
 ## Workflow
 
-1. Verify that `package/` exists in the repository root and that the target path is correct.
+1. Verify that `package/` exists as a subdirectory in this skill folder, and use the files therein.
 2. If the target package does not exist yet, create it with `usethis::create_package(path, open = FALSE, rstudio = FALSE)`.
 3. If the target directory exists, is non-empty, and does not contain `DESCRIPTION`, stop and ask the user how to proceed.
 4. Symlink these files from `package/` into the target package:
@@ -65,9 +65,8 @@ Use `cp` for new copied files. If overwrite was approved, use `cp -f`.
 ## Important rules
 
 - Always ask before replacing existing config.
-- Do not use the old bootstrap helper script; the workflow is simple enough to perform directly.
-- Do not change template files in `package/` unless the user explicitly asks for that.
-- After setup, treat the target package's `AGENTS.md` as authoritative for coding style, testing, documentation, and package workflow.
+- Do not change template files in `package/`.
+- After setup, treat the target package's `AGENTS.md` as authoritative.
 
 ## After setup
 
