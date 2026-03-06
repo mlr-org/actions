@@ -31,6 +31,8 @@ do we need pkgdown in general setup?
   }
 }
 
+claude asks WAY too often for permissions? how to config this
+
 
 generalize setup to multiple llm tools
 
