@@ -6,8 +6,6 @@ so ein skeletion setup skill ding, damit ich ein R paket erstellen kann aber all
 
 spellchecker / cpsell setup
 
-LL = 120
-
 gucken dass die skillz auch mit cursor usw gehen
 
 agents.md für r packages fertig stellen
@@ -18,8 +16,20 @@ marc erklärt mir sandbox setup
 
 testen wie diffs bei claude aussehen
 
+generisches setup für multiple agents.md files
 
+MD file auch für C code schreiben
 
+do we need pkgdown in general setup?
+
+{
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowWrite": ["~/repositories"]
+    }
+  }
+}
 
 
 
