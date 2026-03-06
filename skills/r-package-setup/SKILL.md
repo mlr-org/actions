@@ -20,7 +20,9 @@ Use this skill when the user wants to:
 Before running anything, make sure you know:
 
 - the target package path
-- whether existing config files may be overwritten or updated 
+- whether existing config files may be overwritten or updated
+- ask whether the package is part of the mlr3 ecosystem or not
+- ask whether the package should contain C or C++ code 
 
 If either is missing, ask first.
 
@@ -31,18 +33,22 @@ If either is missing, ask first.
 3. If the target directory exists, is non-empty, and does not contain `DESCRIPTION`, stop and ask the user how to proceed.
 4. Symlink these files from `package/` into the target package:
    - `.editorconfig`
-   - `.clang-format`
+   - `.clang-format` (if the R package contains C or C++ code)
    - `.lintr`
    - `air.toml`
    - `AGENTS.md`
    - `cspell.json`
+   - `.agents/mlr3.md` (if the R package is part of the mlr3 ecosystem)
 5. Copy these files from `package/` into the target package:
    - `.gitignore`
    - `.Rbuildignore`
    - `.vscode/settings.json`
-   - `.vscode/tasks.json`
+   - `.vscode/tasks.json` (if the R package contains C or C++ code)
    - `.cspell/project-words.txt`
    - `.claude/settings.json`
+
+
+
 6. If any destination file already exists, only replace it when the user explicitly approved overwriting. Otherwise skip it and report the skip.
 7. Read the target package's `AGENTS.md` and follow it for all further work in that package.
 8. Report which files were symlinked, copied, overwritten, or skipped.

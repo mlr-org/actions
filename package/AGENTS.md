@@ -102,5 +102,7 @@ Rscript -e "devtools::check()"
 - Do not capitalize normal nouns or method names. "Bayesian" is capitalized, "random forest" is not.
 - Use cspell to check against typos, and add needed words to .cspell/project-words.txt if reasonable
 
+## Further agents files
+- Read and respect all files in the `.agents` folder
 
 

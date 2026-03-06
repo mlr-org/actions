@@ -2,11 +2,6 @@ clang-tidy for C linting machen
 
 compile commands testen
 
-
-marc erklärt mir sandbox setup
-
-generisches setup für multiple agents.md files
-
 MD file auch für C code schreiben
 
 gucken dass die skillz auch mit cursor usw gehen
@@ -15,3 +10,8 @@ generalize setup to multiple llm tools
  Claude Code	CLAUDE.md
  Gemini CLI	GEMINI.md
  GitHub Copilot	.github/copilot-instructions.md
+
+
+mlr3.md fertig machen --> marc
+
+
