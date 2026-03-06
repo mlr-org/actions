@@ -2,7 +2,6 @@ clang-tidy for C linting machen
 
 compile commands testen
 
-gucken dass die skillz auch mit cursor usw gehen
 
 marc erklärt mir sandbox setup
 
@@ -10,18 +9,7 @@ generisches setup für multiple agents.md files
 
 MD file auch für C code schreiben
 
-{
-  "sandbox": {
-    "enabled": true,
-    "filesystem": {
-      "allowWrite": ["~/repositories"]
-    }
-  }
-}
-
-claude asks WAY too often for permissions? how to config this
-
-
+gucken dass die skillz auch mit cursor usw gehen
 generalize setup to multiple llm tools
  openAI Codex, Claude	AGENTS.md
  Claude Code	CLAUDE.md
