@@ -1,6 +1,7 @@
 ---
 name: r-package-setup
 description: Creates or bootstraps R packages by applying the shared template files from `package/`, including editor, lint, build, and AI guidance config.` rules copied into a target package.
+tools: Read, Edit, Glob, Grep, Bash, Write, AskUserQuestion, WebFetch
 ---
 
 # R package setup
