@@ -31,7 +31,7 @@ Rscript -e "devtools::check()"
 ### Coding
 
 * Always use `=` for assignment, never `<-`.
-* 2-space indentation, 180-character line limit.
+* 2-space indentation, 120-character line limit.
 * `snake_case` for functions and variables, `CamelCase` for R6 classes.
 * Double quotes for strings, explicit `TRUE`/`FALSE` (never `T`/`F`), explicit `1L` for integers.
 * Use `invoke()` from mlr3misc instead of `do.call()`.
@@ -127,7 +127,7 @@ Use structured error/warning functions from mlr3misc: `error_config()`, `error_i
 ### Documentation
 
 - Every user-facing function should be exported and have roxygen2 documentation.
-- Wrap roxygen comments at 180 characters.
+- Wrap roxygen comments at 120 characters.
 - Write one sentence per line.
 - If a sentence exceeds the limit, break at a comma or other appropriate point.
 - Internal functions should not have roxygen documentation.
