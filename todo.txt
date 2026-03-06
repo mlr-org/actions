@@ -1,0 +1,6 @@
+clang-tidy for C linting machen
+
+compile commands testen
+
+
+
