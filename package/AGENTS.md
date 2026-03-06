@@ -127,7 +127,9 @@ Use structured error/warning functions from mlr3misc: `error_config()`, `error_i
 ### Documentation
 
 - Every user-facing function should be exported and have roxygen2 documentation.
-- Wrap roxygen comments at 120 characters.
+- Wrap roxygen comments at 180 characters.
+- Write one sentence per line.
+- If a sentence exceeds the limit, break at a comma or other appropriate point.
 - Internal functions should not have roxygen documentation.
 - Whenever you add a new (non-internal) documentation topic, also add the topic to `_pkgdown.yml`.
 - Always re-document the package after changing a roxygen2 comment.
