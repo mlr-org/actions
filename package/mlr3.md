@@ -21,13 +21,13 @@ This package uses R6 classes organized around a dictionary registry pattern.
 
 Objects are registered in dictionaries and accessed via sugar functions:
 
-| Dictionary | Sugar | Example |
-|---|---|---|
-| `mlr_learners` | `lrn()` / `lrns()` | `lrn("classif.rpart", cp = 0.1)` |
-| `mlr_tasks` | `tsk()` / `tsks()` | `tsk("iris")` |
-| `mlr_measures` | `msr()` / `msrs()` | `msr("classif.ce")` |
-| `mlr_resamplings` | `rsmp()` / `rsmps()` | `rsmp("cv", folds = 5)` |
-| `mlr_task_generators` | `tgen()` / `tgens()` | `tgen("friedman1")` |
+| Dictionary            | Sugar                | Example                          |
+|-----------------------|----------------------|----------------------------------|
+| `mlr_learners`        | `lrn()` / `lrns()`   | `lrn("classif.rpart", cp = 0.1)` |
+| `mlr_tasks`           | `tsk()` / `tsks()`   | `tsk("iris")`                    |
+| `mlr_measures`        | `msr()` / `msrs()`   | `msr("classif.ce")`              |
+| `mlr_resamplings`     | `rsmp()` / `rsmps()` | `rsmp("cv", folds = 5)`          |
+| `mlr_task_generators` | `tgen()` / `tgens()` | `tgen("friedman1")`              |
 
 Every new object **must** be registered at the bottom of its file:
 
@@ -114,10 +114,6 @@ Use structured error/warning functions from mlr3misc: `error_config()`, `error_i
 
 - Use sentence case for headings.
 - Use US English.
-
-
-
-
 
 ### Proofreading
 
