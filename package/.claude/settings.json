@@ -48,14 +48,7 @@
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "network": {
-      "allowedDomains": [
-        "github.com",
-        "*.github.com",
-        "*.githubusercontent.com",
-        "cran.r-project.org",
-        "cloud.r-project.org",
-        "www.stats.ox.ac.uk"
-      ]
+      "allowedDomains": ["*"]
     },
     "filesystem": {
       "allowWrite": [
