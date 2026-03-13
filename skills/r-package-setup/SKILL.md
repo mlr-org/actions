@@ -31,7 +31,13 @@ If either is missing, ask first.
 1. Verify that `package/` exists as a subdirectory in this skill folder, and use the files therein.
 2. If the target package does not exist yet, create it with `usethis::create_package(path, open = FALSE, rstudio = FALSE)`.
 3. If the target directory exists, is non-empty, and does not contain `DESCRIPTION`, stop and ask the user how to proceed.
-4. Symlink these files from `package/` into the target package:
+4. Copy these files from `package/` into the target package:
+   - `.gitignore`
+   - `.Rbuildignore`
+   - `.vscode/settings.json`
+   - `.vscode/tasks.json` (if the R package contains C or C++ code)
+   - `.cspell/project-words.txt`
+   - `.claude/settings.json`
    - `.editorconfig`
    - `.clang-format` (if the R package contains C or C++ code)
    - `.lintr`
@@ -39,16 +45,7 @@ If either is missing, ask first.
    - `AGENTS.md`
    - `cspell.json`
    - `.agents/mlr3.md` (if the R package is part of the mlr3 ecosystem)
-5. Copy these files from `package/` into the target package:
-   - `.gitignore`
-   - `.Rbuildignore`
-   - `.vscode/settings.json`
-   - `.vscode/tasks.json` (if the R package contains C or C++ code)
-   - `.cspell/project-words.txt`
-   - `.claude/settings.json`
-
-
-
+5. Create a symlink from `AGENTS.md` to `CLAUDE.md` in the target package.
 6. If any destination file already exists, only replace it when the user explicitly approved overwriting. Otherwise skip it and report the skip.
 7. Read the target package's `AGENTS.md` and follow it for all further work in that package.
 8. Report which files were symlinked, copied, overwritten, or skipped.
