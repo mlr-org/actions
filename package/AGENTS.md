@@ -104,6 +104,6 @@ Rscript -e "devtools::check()"
 - Use cspell to check against typos, and add needed words to .cspell/project-words.txt if reasonable
 
 ## Further agents files
-- Read and respect all files in the `.agents` folder
+- Read and respect all files in the `extra-rules` folder
 
 
