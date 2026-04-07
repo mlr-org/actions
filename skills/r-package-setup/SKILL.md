@@ -37,7 +37,6 @@ If either is missing, ask first.
    - `.vscode/settings.json`
    - `.vscode/tasks.json` (if the R package contains C or C++ code)
    - `.cspell/project-words.txt`
-   - `.claude/settings.json`
    - `.editorconfig`
    - `.clang-format` (if the R package contains C or C++ code)
    - `.lintr`
