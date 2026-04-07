@@ -10,9 +10,11 @@
 ^\.?air\.toml$
 ^\.Renviron$
 ^\.Rproj\.user$
+^\.agents$
 ^\.ccache$
 ^\.clangd$
 ^\.claude$
+^\.cspell$
 ^\.cursor$
 ^\.editorconfig$
 ^\.git$
@@ -25,7 +27,9 @@
 ^attic$
 ^attic_local$
 ^cran-comments\.md$
+^cspell\.json$
 ^docs$
+^extra-rules$
 ^inst/extdata/.+\.R$
 ^local_attic$
 ^man-roxygen$
