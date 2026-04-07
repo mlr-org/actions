@@ -2,5 +2,16 @@ clang-tidy for C linting machen
 
 compile commands testen
 
+MD file auch für C code schreiben
+
+gucken dass die skillz auch mit cursor usw gehen
+generalize setup to multiple llm tools
+ openAI Codex, Claude	AGENTS.md
+ Claude Code	CLAUDE.md
+ Gemini CLI	GEMINI.md
+ GitHub Copilot	.github/copilot-instructions.md
+
+
+mlr3.md fertig machen --> marc
 
 

@@ -6,36 +6,9 @@
  "gitlens.currentLine.enabled": false,
 
  // ********** settings for cspell *************
-  // don't show spelling errors in the problem panel, hints dint appear in the problem panel
+  // show spelling errors as hints (not in problems panel)
   "cSpell.diagnosticLevel": "Hint",
-  // only check spelling in enabled file types
-  "cSpell.checkOnlyEnabledFileTypes": true,
-  "cSpell.enabledFileTypes": {
-    "*": false,
-    "markdown": true,
-    "plaintext": true,
-    "r": true,
-    "qmd": true,
-  },
-  "cSpell.useGitignore": true, // respects .gitignore
-  // this allows to ignore paths
-  // "cSpell.ignorePaths": [
-  //   "**/revdep/**"
-  // ]
-  // whitelist for paths
-  // "cSpell.files": [
-  //   "**/*.{md,R,Rmd,Rd}",
-  //   "man/**"
-  // ]
-  "cSpell.languageSettings": [
-    {
-      "languageId": "r",
-      "includeRegExpList": [
-        // include comments (also roxygen): matches "#'" and everything until end-of-line (g=all matches, m=multiline)
-        "/#.*$/gm"
-      ]
-    }
-  ],
+  // file type whitelist, useGitignore, and languageSettings live in cspell.json
 
  // ********** settings for R *************
 
