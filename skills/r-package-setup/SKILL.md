@@ -44,6 +44,7 @@ If either is missing, ask first.
    - `AGENTS.md`
    - `cspell.json`
    - `extra-rules/mlr3.md` (if the R package is part of the mlr3 ecosystem)
+   - `extra-rules/commit-messages.md` (as if the the user wants this)
 5. Create a symlink from `AGENTS.md` to `CLAUDE.md` in the target package.
 6. If any destination file already exists, only replace it when the user explicitly approved overwriting. Otherwise skip it and report the skip.
 7. Read the target package's `AGENTS.md` and follow it for all further work in that package.
