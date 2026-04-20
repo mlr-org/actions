@@ -15,3 +15,5 @@ indent_size = 2
 max_line_length = 120
 # Remove trailing whitespace
 trim_trailing_whitespace = true
+# Ensure files end with a newline
+insert_final_newline = true
