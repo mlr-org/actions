@@ -619,7 +619,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: quarto-dev/quarto-actions/setup@v2
       - run: quarto render
       - uses: peaceiris/actions-gh-pages@v3
